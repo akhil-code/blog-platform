@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% block title %}
+    Success !
+{% end block%}
+
+{% block body %}
+    
+{% if message %}
+        <h2>
+            {{ message }}
+        </h2>
+    {% endif %}
+
+{% end block%}

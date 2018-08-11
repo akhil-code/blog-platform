@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+        
+{% block title %}
+    Login
+{% endblock %}
+
+{% block body %}
+    <h2>Login</h2>
+    <hr><br>
+    {% if error_message %}
+        <i>{{ error_message }}</i>
+    {% endif %}
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <input type="text" placeholder="username" name="username">
+        <input type="password" placeholder="password" password="password">
+        <br><br>
+        <input type="submit" value="Log in">
+    </form>
+{% endblock %}
