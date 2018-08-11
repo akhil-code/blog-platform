@@ -1,0 +1,17 @@
+{% if message %}
+    <i>* {{ message }}</i>
+{% endif %}
+
+<form method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    <input type="text" name="fullname" placeholder="full name"><br>
+    <input type="text" name="username" placeholder="user name"><br>
+    <input type="email" name="email" placeholder="E-mail"><br>
+    <input type="password" name="password" placeholder="password"><br>
+    <br>
+    <input type="submit" value="sign up">
+    <input type="reset" value="reset">
+</form>
+
+<a href="{% url 'index' %}">Go to home page</a><br>
+<a href="{% url 'login' %}">Log in</a><br>

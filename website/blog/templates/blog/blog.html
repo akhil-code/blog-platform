@@ -1,3 +1,13 @@
+{% if user %}
+    Welcome {{ user.author }}<br>
+    <a href=" {% url 'logout' %}"> logout </a><br>
+{% else %}
+    <a href=" {% url 'login' %}"> login </a><br>
+    <a href=" {% url 'signup' %}"> Sign up </a><br>
+{% endif %}
+
+<a href="{% url 'index' %}">Go to home page</a>
+
 {% if blog %}
     <h2> {{ blog.title }} </h2>
     <h4> by <a href="{% url 'author_posts' blog.author.id %}"> {{ blog.author }} </a> on {{ blog.date_posted }} </h4>
@@ -12,6 +22,15 @@
         {% endfor %}
     {% endif %}
     <br>
-    <a href="{% url 'index' %}">Go to home page</a>
+
+    {% if user %}
+        <h4>Leave a comment</h4>
+        <form method="post" action="{% url 'add_comment' blog.id %}">
+            {% csrf_token %}
+            <textarea rows="3" name="comment" placeholder="write your comment here"></textarea><br>
+            <input type="hidden" name="author_id" value="{{ user.author.id }}">
+            <input type="submit" value="add comment">
+        </form>
+    {% endif %}
 
 {% endif %}

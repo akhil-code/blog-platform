@@ -1,0 +1,22 @@
+{% if user %}
+    Welcome {{ user.first_name }}<br>
+    <a href=" {% url 'logout' %}"> logout </a><br>
+{% else %}
+    <a href=" {% url 'login' %}"> login </a><br>
+    <a href=" {% url 'signup' %}"> Sign up </a><br>
+{% endif %}
+
+{% if message %}
+    {{ message }}
+{% endif %}
+
+{% if blogs %}
+    {% for blog in blogs %}
+        <li>
+            <a href="{% url 'blog_view' blog.id %}">
+                {{ blog.title }} by {{ blog.author}} posted on {{ blog.date_posted }}
+            </a>
+        </li>
+    {% endfor %}
+{% endif %}
+
