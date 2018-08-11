@@ -1,0 +1,17 @@
+{% if blog %}
+    <h2> {{ blog.title }} </h2>
+    <h4> by <a href="{% url 'author_posts' blog.author.id %}"> {{ blog.author }} </a> on {{ blog.date_posted }} </h4>
+    <p>
+        {{ blog.body }}
+    </p>
+
+    {% if blog.comments.all %}
+        <h4>Comments</h4>
+        {% for comment in blog.comments.all %}
+            <li>{{ comment.comment }}</li>
+        {% endfor %}
+    {% endif %}
+    
+    <a href="{% url 'index' %}">Go to home page</a>
+
+{% endif %}

@@ -1,12 +1,63 @@
 <!DOCTYPE html>
+
 <html>
-    <head>
-        <title>
-            {% block title %}{% endblock %}
-        </title>
-        {% block head %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+  
+  {% comment %} head {% endcomment %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% comment %} Page title {% endcomment %}
+    <title>{% block title %}{% endblock %}</title>
+    {% comment %} icon {% endcomment %}
+    {% load static %}
+    <link rel="icon" href="{% static 'blog/img/icon.png' %}" sizes="32x32"/>
+
+    {% comment %} bootstrap css files {% endcomment %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  </head>
+
+  {% comment %} body {% endcomment %}
+  <body>
+    
+    {% comment %} nav bar {% endcomment %}
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        {% comment %} icon {% endcomment %}
+        <img align="left" style="margin-top:5px;margin-bottom:5px;margin-right:10px;" src="{% static 'blog/img/icon.png' %}" alt="logo" height="42" width="42">
+        {% comment %} minimize icon design {% endcomment %}
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" style="color:white;margin-right:30px;">EmR Club</a>
+        </div>
+        
+        {% comment %} navbar items {% endcomment %}
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#">Workshops</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact us</a></li>
+            <li><a href="#">About us</a></li>
+            <li><a href="#">Queries / Feedback</a></li>
+            <li><a href="#">Resources</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% comment %} navbar end {% endcomment %}
+
+    <br><br><br><br>
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
+
+  </body>
+  
 </html>

@@ -15,7 +15,7 @@ class Blog(models.Model):
     body = models.TextField(blank=False)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=False)
     date_posted = models.DateTimeField(auto_now_add=True, blank=False)
-    
+
     def __str__(self):
         return f"{self.title} by {self.author}"
 
@@ -36,9 +36,9 @@ class Tag(models.Model):
 
 class Comment(models.Model):
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=False)
-    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, blank=False)
     comment = models.TextField(blank=False)
     date_posted = models.DateTimeField(auto_now_add=True, blank=False)
+    blog = models.ForeignKey('Blog', on_delete=models.CASCADE, related_name='comments')
 
     def __str__(self):
         return f"Comment by {self.author} on {self.blog}"
