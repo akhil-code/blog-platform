@@ -41,6 +41,15 @@ function addImageField(){
     myForm.insertBefore(breakLine, buttonHolder);
 }
 
+function hasValidExtension(filename){
+    var validExtensions = [".png", ".jpg", ".jpeg", ".gif", ".bmp"];
+    for(i=0; i<validExtensions.length; i++){
+        if(filename.substr(filename.length-validExtensions[i].length, validExtensions[i].length).toLowerCase() == validExtensions[i].toLowerCase())
+            return true;
+    }
+    return false;
+}
+
 function postBlog(){
     const myForm = document.querySelector('#myform');
 
@@ -48,10 +57,10 @@ function postBlog(){
     var positions = "";
     document.querySelectorAll(".blogContent").forEach(function(field){
         
-        if(field.type == "file" && field.value !="") positions += "1";
-        else if(field.value != "") positions += "0";
+        if(field.type == "file" && field.value !="" && hasValidExtension(field.value)) positions += "1";
+        else if(field.type == "textarea" && field.value != "") positions += "0";
         else myForm.removeChild(field);
-        
+
     });
 
     // creating a hidden input field for storing order of the contents

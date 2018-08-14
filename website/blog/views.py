@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from blog.models import Blog, Author, Comment
+import json
 
 def index(request):
     context = {
@@ -94,23 +95,28 @@ def add_comment(request, blog_id):
             return HttpResponseRedirect(reverse('blog_view', kwargs={'blog_id':blog_id,}))
 
 def blog_input_view(request):
-    if request.method == 'POST':
-        title = request.POST['title']
-        contentItems = request.POST.getlist("myContent[]")
-        contentOrder = request.POST.get("contentOrder")
-        files = request.FILES.getlist("myfile[]")
+    # submitting the post
+    if request.method == 'POST' and request.user.is_authenticated:
+        try:
+            title = request.POST['title']
+            contentOrder = request.POST.get("contentOrder")
+            contentItems = request.POST.getlist("myContent[]")
+            contentItems = json.dumps(contentItems)
+            author = request.user.author
 
-        print(f"Title: {title}")
-        print(f"Contents: {contentItems}")
-        print(f"Order: {contentOrder}")
-        print(f"Files: {files}")
+            # saving images
+            files = request.FILES.getlist("myfile[]")
+            for mFile in files:
+                with open('blog/static/blog/upload/' + mFile.name, 'wb+') as destination:
+                    for chunk in mFile.chunks():
+                        destination.write(chunk)
 
-        # for mFile in files:
-        #     with open('blog/static/blog/upload/' + mFile.name, 'wb+') as destination:
-        #         for chunk in mFile.chunks():
-        #             destination.write(chunk)
+            Blog(title=title, body=contentItems, contentOrder=contentOrder, author=author).save()
+            return HttpResponseRedirect(reverse("author_posts", kwargs={'author_id':author.id}))
+        except:
+            print(f"Error adding a new blog")
+            return render(request, reverse("index"))
 
-        return HttpResponse("Blog Posted successfully")
 
     elif request.user.is_authenticated:
         context = {
@@ -119,7 +125,3 @@ def blog_input_view(request):
         return render(request, 'blog/template.html', context)
     else:
         return HttpResponseRedirect(reverse('login'))
-
-# temp views - testing purpose
-def temp_view(request):
-    return render(request, 'blog/template.html')

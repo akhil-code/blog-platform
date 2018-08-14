@@ -1,3 +1,6 @@
+
+
+
 <html>
     <head>
         {% load static %}
@@ -5,6 +8,20 @@
     </head>
     
     <body>
+        
+        {% if user %}
+            Welcome {{ user.author }}<br>
+            <a href=" {% url 'logout' %}"> logout </a><br>
+            <a href=" {% url 'blog_input' %}"> add blog </a><br>
+        {% else %}
+            <a href=" {% url 'login' %}"> login </a><br>
+            <a href=" {% url 'signup' %}"> Sign up </a><br>
+        {% endif %}
+        <a href="{% url 'index' %}">Go to home page</a>
+        <br>
+        <br>
+
+        <h2>Write Blog</h2>
         <form id="myform" method="post" action="{% url 'blog_input' %}" enctype="multipart/form-data">
             {% csrf_token %}
             <input type="text" name="title" placeholder="Blog title"><br>

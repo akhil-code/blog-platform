@@ -31,9 +31,10 @@ class Tag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=255, blank=False)
     body = models.TextField(blank=False)
+    contentOrder = models.CharField(max_length=255, blank=True, default=None)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=False)
     date_posted = models.DateTimeField(auto_now_add=True, blank=False)
-    tags = models.ManyToManyField(Tag, blank=False, related_name='blogs')
+    tags = models.ManyToManyField(Tag, blank=True, related_name='blogs')
 
     def __str__(self):
         return f"{self.title} by {self.author}"
