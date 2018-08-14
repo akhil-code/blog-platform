@@ -16,6 +16,7 @@ def author_posts_view(request, author_id):
     author = Author.objects.get(pk=author_id)
     context = {
         'blogs' : Blog.objects.filter(author=author),
+        'user' : request.user if request.user.is_authenticated else None,
     }
     return render(request, 'blog/index.html', context)
 
@@ -90,5 +91,35 @@ def add_comment(request, blog_id):
             return HttpResponseRedirect(reverse('blog_view', kwargs={'blog_id':blog_id,}))
 
         except AssertionError:
-            pass
-        
+            return HttpResponseRedirect(reverse('blog_view', kwargs={'blog_id':blog_id,}))
+
+def blog_input_view(request):
+    if request.method == 'POST':
+        title = request.POST['title']
+        contentItems = request.POST.getlist("myContent[]")
+        contentOrder = request.POST.get("contentOrder")
+        files = request.FILES.getlist("myfile[]")
+
+        print(f"Title: {title}")
+        print(f"Contents: {contentItems}")
+        print(f"Order: {contentOrder}")
+        print(f"Files: {files}")
+
+        # for mFile in files:
+        #     with open('blog/static/blog/upload/' + mFile.name, 'wb+') as destination:
+        #         for chunk in mFile.chunks():
+        #             destination.write(chunk)
+
+        return HttpResponse("Blog Posted successfully")
+
+    elif request.user.is_authenticated:
+        context = {
+            'user' : request.user if request.user.is_authenticated else None,
+        }
+        return render(request, 'blog/template.html', context)
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+# temp views - testing purpose
+def temp_view(request):
+    return render(request, 'blog/template.html')

@@ -1,0 +1,18 @@
+{% if user %}
+    Welcome {{ user.author }}<br>
+    <a href=" {% url 'logout' %}"> logout </a><br>
+
+    {% comment %} blog input {% endcomment %}
+    <form method="post" action="{% url 'blog_input' %}">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Blog title"><br>
+        <textarea rows="10" name="body" placeholder="Content"></textarea><br>
+        <input type="submit" value="post"><br>
+    </form>
+
+{% else %}
+    You need to login or sign up to write a blog
+    <a href=" {% url 'login' %}"> login </a><br>
+    <a href=" {% url 'signup' %}"> Sign up </a><br>
+{% endif %}
+

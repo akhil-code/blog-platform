@@ -1,6 +1,7 @@
 {% if user %}
     Welcome {{ user.author }}<br>
     <a href=" {% url 'logout' %}"> logout </a><br>
+    <a href=" {% url 'blog_input' %}"> add blog </a><br>
 {% else %}
     <a href=" {% url 'login' %}"> login </a><br>
     <a href=" {% url 'signup' %}"> Sign up </a><br>
