@@ -32,6 +32,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=255, blank=False)
     body = models.TextField(blank=False)
     contentOrder = models.CharField(max_length=255, blank=True, default=None)
+    no_of_images = models.IntegerField(default=0, blank=True)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=False)
     date_posted = models.DateTimeField(auto_now_add=True, blank=False)
     tags = models.ManyToManyField(Tag, blank=True, related_name='blogs')

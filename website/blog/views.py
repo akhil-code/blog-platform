@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from blog.models import Blog, Author, Comment
 import json
 
+# home page
 def index(request):
     context = {
         'blogs' : Blog.objects.all(),
@@ -13,6 +14,7 @@ def index(request):
     }
     return render(request, 'blog/index.html', context)
 
+# authors posts page
 def author_posts_view(request, author_id):
     author = Author.objects.get(pk=author_id)
     context = {
@@ -21,6 +23,7 @@ def author_posts_view(request, author_id):
     }
     return render(request, 'blog/index.html', context)
 
+# shows blog content
 def blog_view(request, blog_id):
     context = {
         'blog' : Blog.objects.get(pk=blog_id),
@@ -28,6 +31,7 @@ def blog_view(request, blog_id):
     }
     return render(request, 'blog/blog.html', context)
 
+# sign up page and handling signup request
 def signup_view(request):
     if request.method == 'POST':
         try:
@@ -50,6 +54,7 @@ def signup_view(request):
     
     return render(request, 'blog/signup.html')
 
+# login and handling login request
 def login_view(request):
     # if login attempt is made
     if request.method == 'POST':
@@ -73,10 +78,12 @@ def login_view(request):
     # loading login page
     return render(request, 'blog/login.html')
 
+# handles logout request
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
 
+# handles adding comments to a blog
 def add_comment(request, blog_id):
     if request.method == 'POST':
         try:
@@ -94,6 +101,7 @@ def add_comment(request, blog_id):
         except AssertionError:
             return HttpResponseRedirect(reverse('blog_view', kwargs={'blog_id':blog_id,}))
 
+# new blog page and processes it's submission
 def blog_input_view(request):
     # submitting the post
     if request.method == 'POST' and request.user.is_authenticated:
@@ -104,24 +112,32 @@ def blog_input_view(request):
             contentItems = json.dumps(contentItems)
             author = request.user.author
 
+            assert contentOrder != None #blog shouldn't be empty
+            assert contentOrder != ""
+            assert author != None
+
             # saving images
             files = request.FILES.getlist("myfile[]")
-            for mFile in files:
-                with open('blog/static/blog/upload/' + mFile.name, 'wb+') as destination:
-                    for chunk in mFile.chunks():
+            
+            blog = Blog(title=title, body=contentItems, contentOrder=contentOrder, author=author, no_of_images=len(files))
+            blog.save()
+
+            for i in range(len(files)):
+                destination_name = 'blog/static/blog/upload/' + str(blog.id) + '_' + str(i) + '_' + files[i].name
+                with open(destination_name, 'wb+') as destination:
+                    for chunk in files[i].chunks():
                         destination.write(chunk)
 
-            Blog(title=title, body=contentItems, contentOrder=contentOrder, author=author).save()
             return HttpResponseRedirect(reverse("author_posts", kwargs={'author_id':author.id}))
-        except:
-            print(f"Error adding a new blog")
-            return render(request, reverse("index"))
-
+        
+        except AssertionError:
+            print(f"Error adding new blog")
+            return HttpResponseRedirect(reverse("index"))
 
     elif request.user.is_authenticated:
         context = {
             'user' : request.user if request.user.is_authenticated else None,
         }
-        return render(request, 'blog/template.html', context)
+        return render(request, 'blog/write_blog.html', context)
     else:
         return HttpResponseRedirect(reverse('login'))

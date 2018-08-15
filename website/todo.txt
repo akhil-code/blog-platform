@@ -1,2 +1,1 @@
 manage blogs by user (delete, edit)
-generating filenames of uploaded images with respect to blog_name+author_name

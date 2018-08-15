@@ -25,8 +25,10 @@
     <br>
 
     {% if user %}
+        {% load static %}
+        <script src="{% static 'blog/js/blog.js' %}"></script>
         <h4>Leave a comment</h4>
-        <form method="post" action="{% url 'add_comment' blog.id %}">
+        <form method="post" id="commentForm" action="{% url 'add_comment' blog.id %}">
             {% csrf_token %}
             <textarea rows="3" name="comment" placeholder="write your comment here"></textarea><br>
             <input type="hidden" name="author_id" value="{{ user.author.id }}">

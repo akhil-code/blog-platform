@@ -1,18 +1,34 @@
-{% if user %}
-    Welcome {{ user.author }}<br>
-    <a href=" {% url 'logout' %}"> logout </a><br>
+<html>
+    <head>
+        {% load static %}
+        <script src="{% static 'blog/js/write_blog.js' %}"></script>
+    </head>
+    
+    <body>
+        
+        {% if user %}
+            Welcome {{ user.author }}<br>
+            <a href=" {% url 'logout' %}"> logout </a><br>
+            <a href=" {% url 'blog_input' %}"> add blog </a><br>
+        {% else %}
+            <a href=" {% url 'login' %}"> login </a><br>
+            <a href=" {% url 'signup' %}"> Sign up </a><br>
+        {% endif %}
+        <a href="{% url 'index' %}">Go to home page</a>
+        <br>
+        <br>
 
-    {% comment %} blog input {% endcomment %}
-    <form method="post" action="{% url 'blog_input' %}">
-        {% csrf_token %}
-        <input type="text" name="title" placeholder="Blog title"><br>
-        <textarea rows="10" name="body" placeholder="Content"></textarea><br>
-        <input type="submit" value="post"><br>
-    </form>
-
-{% else %}
-    You need to login or sign up to write a blog
-    <a href=" {% url 'login' %}"> login </a><br>
-    <a href=" {% url 'signup' %}"> Sign up </a><br>
-{% endif %}
-
+        <h2>Write Blog</h2>
+        <form id="myform" method="post" action="{% url 'blog_input' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="title" placeholder="Blog title"><br>
+            <div id="button-holder">
+                <input type="button" id="addTextButton" value="add text">
+                <input type="button" id="addImageButton" value="add image">
+                <br>
+                <input type="submit" value="Post Blog">
+                <input type="reset" value="Reset">
+            </div>
+        </form>
+    </body>
+</html>
