@@ -5,7 +5,7 @@
     </head>
     
     <body>
-        
+        <!-- navbar items -->
         {% if user %}
             Welcome {{ user.author }}<br>
             <a href=" {% url 'logout' %}"> logout </a><br>
@@ -17,11 +17,36 @@
         <a href="{% url 'index' %}">Go to home page</a>
         <br>
         <br>
+        <!-- navbar end -->
 
+        <!-- body start -->
         <h2>Write Blog</h2>
         <form id="myform" method="post" action="{% url 'blog_input' %}" enctype="multipart/form-data">
             {% csrf_token %}
-            <input type="text" name="title" placeholder="Blog title"><br>
+
+            <!-- title section -->
+            <label for="title">Title: </label>
+            <input id="title" type="text" name="title" placeholder="Blog title">
+            <br><br>
+            
+            <!-- tags section -->
+            <div id="tagHolder">
+                <label for="tagInput">search tags:</label>
+                <input list="tags" id="tagInput">
+                <!-- add tag button -->
+                <button id="addTag" type="button">Add tag</button>
+                <!-- list of tags currently added -->
+                <ul id="taggedItems"></ul>
+                <!-- tag list -->
+                <datalist id="tags">
+                    {% for tag in tags %}
+                        <option value="{{ tag }}" data-id="{{tag.id}}">{{ tag }}</option>
+                    {% endfor %}
+                </datalist>
+            </div>
+            <br><br>
+
+            <!-- buttons section -->
             <div id="button-holder">
                 <input type="button" id="addTextButton" value="add text">
                 <input type="button" id="addImageButton" value="add image">
@@ -29,6 +54,7 @@
                 <input type="submit" value="Post Blog">
                 <input type="reset" value="Reset">
             </div>
+
         </form>
     </body>
 </html>

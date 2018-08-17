@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     document.querySelector("#addTextButton").onclick = addTextField;
     document.querySelector("#addImageButton").onclick = addImageField;
     document.querySelector("#myform").onsubmit = postBlog;
+    document.querySelector("#addTag").onclick = addTag;
 });
 
 function createTextArea(){
@@ -91,6 +92,38 @@ function hasValidExtension(filename){
 
 // Intermediate steps before blog is sumitted
 function postBlog(){
+    // storing position order
+    addContentOrderInput();
+    // storing tags in the form
+    addTagsInput();
+    // proceed with the submission
+    return true;
+}
+
+function addTagsInput(){
+    var existingTags = [];
+    var newTags = [];
+    document.querySelectorAll("#taggedItems > li").forEach(function(itemNode){
+        if(itemNode.dataset["id"] == "undefined") newTags[newTags.length] = itemNode.innerHTML;
+        else existingTags[existingTags.length] = itemNode.dataset["id"]; 
+    });
+
+    
+    const myForm = document.querySelector('#myform');
+    let hiddenInput = document.createElement("input");
+    hiddenInput.name = "existingTags";
+    hiddenInput.type = "hidden";
+    hiddenInput.value = JSON.stringify(existingTags);
+    myForm.appendChild(hiddenInput);
+    
+    hiddenInput = document.createElement("input");
+    hiddenInput.name = "newTags";
+    hiddenInput.type = "hidden";
+    hiddenInput.value = JSON.stringify(newTags);
+    myForm.appendChild(hiddenInput);
+}
+
+function addContentOrderInput(){
     const myForm = document.querySelector('#myform');
     // storing position order
     var positions = "";
@@ -99,12 +132,32 @@ function postBlog(){
         else if(field.type == "textarea" && field.value != "") positions += "0";
         else myForm.removeChild(field);
     });
+
     // creating a hidden input field for storing order of the contents
     const hiddenInput = document.createElement("input");
     hiddenInput.name = "contentOrder";
     hiddenInput.type = "hidden";
     hiddenInput.value = positions;
     myForm.appendChild(hiddenInput);
-    // proceed with the submission
-    return true;
+}
+
+function addTag(){
+        let itemsHolder = document.querySelector("#taggedItems");
+        let newItem = document.createElement("li");
+        let inputField = document.getElementById("tagInput");
+        if(inputField.value == "")
+            return;
+        newItem.innerHTML = inputField.value;
+        newItem.dataset["id"] = getId(newItem.innerHTML);
+        itemsHolder.appendChild(newItem);
+        inputField.value = "";
+}
+
+function getId(tag){
+    let nodes = document.querySelectorAll("datalist > option");
+    for(i=0;i<nodes.length;i++){
+        if(tag == nodes[i].value)
+            return nodes[i].dataset["id"];
+    }
+    return undefined;
 }

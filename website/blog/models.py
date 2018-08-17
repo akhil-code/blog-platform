@@ -12,18 +12,10 @@ class Author(models.Model):
         return f"{self.user.first_name}"
 
 
-class Category(models.Model):
-    name = models.CharField(max_length=255, blank=False)
-    views = models.IntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.name}"
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=255, blank=True)
     views = models.IntegerField(default=0)
-    category = models.ForeignKey('Category', on_delete=models.CASCADE, blank=False)
+    posts = models.IntegerField(default=0)
     
     def __str__(self):
         return f"{self.name}"

@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from blog.models import Blog, Author, Comment
+from blog.models import Blog, Author, Comment, Tag
 import json
 
 # home page
@@ -106,10 +106,15 @@ def blog_input_view(request):
     # submitting the post
     if request.method == 'POST' and request.user.is_authenticated:
         try:
+            # title
             title = request.POST['title']
+            #tags
+            existingTags = json.loads(request.POST["existingTags"])
+            newTags = json.loads(request.POST["newTags"])
+            #content
             contentOrder = request.POST.get("contentOrder")
-            contentItems = request.POST.getlist("myContent[]")
-            contentItems = json.dumps(contentItems)
+            contentItems = json.dumps(request.POST.getlist("myContent[]"))
+            # author
             author = request.user.author
 
             assert contentOrder != None #blog shouldn't be empty
@@ -121,6 +126,18 @@ def blog_input_view(request):
             
             blog = Blog(title=title, body=contentItems, contentOrder=contentOrder, author=author, no_of_images=len(files))
             blog.save()
+
+            # adding tags
+            for tagId in existingTags:
+                tag = Tag.objects.get(pk=tagId)
+                blog.tags.add(tag)
+                blog.save()
+            
+            for tagName in newTags:
+                tag = Tag(name=tagName)
+                tag.save()
+                blog.tags.add(tag)
+                blog.save()
 
             for i in range(len(files)):
                 destination_name = 'blog/static/blog/upload/' + str(blog.id) + '_' + str(i) + '_' + files[i].name
@@ -137,6 +154,7 @@ def blog_input_view(request):
     elif request.user.is_authenticated:
         context = {
             'user' : request.user if request.user.is_authenticated else None,
+            'tags' : Tag.objects.all(),
         }
         return render(request, 'blog/write_blog.html', context)
     else:
