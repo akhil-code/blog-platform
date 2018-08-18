@@ -31,6 +31,7 @@ class Blog(models.Model):
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=False)
     date_posted = models.DateTimeField(auto_now_add=True, blank=False)
     tags = models.ManyToManyField(Tag, blank=True, related_name='blogs')
+    rating = models.DecimalField(default=0.0, decimal_places=6, max_digits=7)
 
     def __str__(self):
         return f"{self.title} by {self.author}"

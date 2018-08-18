@@ -27,6 +27,15 @@ def setRatings():
             if web.tag_views > 0:
                 tag.rating += 0.75*((float)(tag.views)/web.tag_views)
             tag.save()
+    
+    for blog in Blog.objects.all():
+        if blog != None:
+            blog.rating = 0
+            tags = blog.tags.all()
+            for tag in tags:
+                blog.rating += tag.rating
+            blog.rating /= len(tags)
+        blog.save()
 
 def increaseWebValues(tag_views=0, author_views=0, posts=0, comments=0):
     web = Website.objects.first()
@@ -67,7 +76,7 @@ def index(request):
         Website().save()
 
     context = {
-        'blogs' : Blog.objects.all(),
+        'blogs' : Blog.objects.order_by('-rating'),
         'user' : request.user if request.user.is_authenticated else None,
         'tags' : Tag.objects.order_by('-rating')[:5],
         'authors' : Author.objects.order_by('-rating')[:5],
