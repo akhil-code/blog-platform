@@ -3,9 +3,15 @@ document.addEventListener('DOMContentLoaded', function(){
     // assigning on click listeners to different buttons in the form
     document.querySelector("#addTextButton").onclick = addTextField;
     document.querySelector("#addImageButton").onclick = addImageField;
-    document.querySelector("#myform").onsubmit = postBlog;
     document.querySelector("#addTag").onclick = addTag;
+    document.querySelector("#myform").onsubmit = postBlog;
 });
+
+function preventFormSubmission(event){
+   if(x == 13){
+       postBlog(false);
+   } 
+}
 
 function createTextArea(){
     // creating text area
@@ -91,7 +97,7 @@ function hasValidExtension(filename){
 }
 
 // Intermediate steps before blog is sumitted
-function postBlog(){
+function postBlog(event){
     // storing position order
     addContentOrderInput();
     // storing tags in the form
@@ -104,8 +110,10 @@ function addTagsInput(){
     var existingTags = [];
     var newTags = [];
     document.querySelectorAll("#taggedItems > li").forEach(function(itemNode){
-        if(itemNode.dataset["id"] == "undefined") newTags[newTags.length] = itemNode.innerHTML;
-        else existingTags[existingTags.length] = itemNode.dataset["id"]; 
+        if(itemNode.innerHTML != ""){
+            if(itemNode.dataset["id"] == "undefined") newTags[newTags.length] = itemNode.innerHTML;
+            else existingTags[existingTags.length] = itemNode.dataset["id"];
+        }
     });
 
     
@@ -128,9 +136,12 @@ function addContentOrderInput(){
     // storing position order
     var positions = "";
     document.querySelectorAll(".blogContent").forEach(function(field){
-        if(field.type == "file" && field.value !="" && hasValidExtension(field.value)) positions += "1";
-        else if(field.type == "textarea" && field.value != "") positions += "0";
-        else myForm.removeChild(field);
+        if(field.value != ''){
+            if(field.type == "file" && hasValidExtension(field.value)) positions += "1";
+            else if(field.type == "textarea") positions += "0";
+        }
+        else
+            myForm.removeChild(field);
     });
 
     // creating a hidden input field for storing order of the contents
@@ -142,11 +153,12 @@ function addContentOrderInput(){
 }
 
 function addTag(){
-        let itemsHolder = document.querySelector("#taggedItems");
-        let newItem = document.createElement("li");
         let inputField = document.getElementById("tagInput");
         if(inputField.value == "")
             return;
+
+        let itemsHolder = document.querySelector("#taggedItems");
+        let newItem = document.createElement("li");
         newItem.innerHTML = inputField.value;
         newItem.dataset["id"] = getId(newItem.innerHTML);
         itemsHolder.appendChild(newItem);

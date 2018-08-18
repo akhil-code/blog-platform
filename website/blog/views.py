@@ -3,31 +3,126 @@ from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from blog.models import Blog, Author, Comment, Tag
+from blog.models import Blog, Author, Comment, Tag, Website
 import json
+
+def setRatings():
+    web = Website.objects.first()
+    for author in Author.objects.all():
+        if(author != None):
+            author.rating = 0
+            if web.posts > 0:
+                author.rating += 0.25*((float)(author.posts)/web.posts)
+            if web.comments > 0:
+                author.rating += 0.1*((float)(author.comments)/web.comments)
+            if web.author_views > 0:
+                author.rating += 0.65*((float)(author.views)/web.author_views)
+            author.save()
+
+    for tag in Tag.objects.all():
+        if(tag != None):
+            tag.rating = 0
+            if web.posts > 0:
+                tag.rating += 0.25*((float)(tag.posts)/web.posts)
+            if web.tag_views > 0:
+                tag.rating += 0.75*((float)(tag.views)/web.tag_views)
+            tag.save()
+
+def increaseWebValues(tag_views=0, author_views=0, posts=0, comments=0):
+    web = Website.objects.first()
+    if tag_views > 0:
+        web.tag_views += tag_views
+    if author_views > 0:
+        web.author_views += author_views
+    if(posts > 0):
+        web.posts += posts
+    if(comments > 0):
+        web.comments += comments
+    web.save()
+
+def increaseAuthorValues(author=None, posts=0, comments=0, views=0):
+    if(author == None):
+        return
+    if(posts > 0):
+        author.posts += posts
+    if(comments > 0):
+        author.comments += comments
+    if(views > 0):
+        author.views += views
+    author.save()
+
+def increaseTagValues(tag=None, posts=0, views=0):
+    if(tag == None):
+        return
+    if(posts > 0):
+        tag.posts += posts
+    if(views > 0):
+        tag.views += views
+    tag.save()
 
 # home page
 def index(request):
+    # if Website has no objects
+    if(Website.objects.first() == None):
+        Website().save()
+
     context = {
         'blogs' : Blog.objects.all(),
         'user' : request.user if request.user.is_authenticated else None,
+        'tags' : Tag.objects.order_by('-rating')[:5],
+        'authors' : Author.objects.order_by('-rating')[:5],
     }
     return render(request, 'blog/index.html', context)
+
 
 # authors posts page
 def author_posts_view(request, author_id):
     author = Author.objects.get(pk=author_id)
+
+    # adjusting statistics
+    increaseAuthorValues(author=author, views=1)
+    increaseWebValues(author_views=1)
+    setRatings()
+
+    #rendering template
     context = {
         'blogs' : Blog.objects.filter(author=author),
         'user' : request.user if request.user.is_authenticated else None,
+        'tags' : Tag.objects.all(),
     }
-    return render(request, 'blog/index.html', context)
+    return render(request, 'blog/author_posts.html', context)
+
+# managing own posts
+def manage_posts_view(request):
+    if request.user.is_authenticated:
+        author = request.user.author
+        context = {
+            'blogs' : Blog.objects.filter(author=author),
+            'user' : request.user if request.user.is_authenticated else None,
+            'tags' : Tag.objects.all(),
+        }
+        return render(request, 'blog/manage.html', context)
+    else:
+        return HttpResponse("Please login to manage your blogs")
 
 # shows blog content
 def blog_view(request, blog_id):
+    blog = Blog.objects.get(pk=blog_id)
+    tags = blog.tags.all()
+    
+    # adjusting statistics
+    increaseAuthorValues(author=blog.author, views=1)    
+    increaseWebValues(author_views=1, tag_views=len(tags))
+    for tag in tags:
+        increaseTagValues(tag=tag, views=1)
+    
+    setRatings()
+
+    # rendering page
     context = {
-        'blog' : Blog.objects.get(pk=blog_id),
+        'blog' : blog,
         'user' : request.user if request.user.is_authenticated else None,
+        'tags' : Tag.objects.all(),
     }
     return render(request, 'blog/blog.html', context)
 
@@ -96,6 +191,11 @@ def add_comment(request, blog_id):
             assert blog != None
             comment = Comment(author=author, comment=message, blog=blog)
             comment.save()
+
+            # adjusting statistics
+            increaseAuthorValues(author=author,comments=1)
+            increaseWebValues(comments=1)
+            setRatings()
             return HttpResponseRedirect(reverse('blog_view', kwargs={'blog_id':blog_id,}))
 
         except AssertionError:
@@ -108,9 +208,6 @@ def blog_input_view(request):
         try:
             # title
             title = request.POST['title']
-            #tags
-            existingTags = json.loads(request.POST["existingTags"])
-            newTags = json.loads(request.POST["newTags"])
             #content
             contentOrder = request.POST.get("contentOrder")
             contentItems = json.dumps(request.POST.getlist("myContent[]"))
@@ -127,17 +224,23 @@ def blog_input_view(request):
             blog = Blog(title=title, body=contentItems, contentOrder=contentOrder, author=author, no_of_images=len(files))
             blog.save()
 
-            # adding tags
+            #tags
+            existingTags = json.loads(request.POST["existingTags"])
+            newTags = json.loads(request.POST["newTags"])
             for tagId in existingTags:
                 tag = Tag.objects.get(pk=tagId)
+                increaseTagValues(tag=tag, posts=1)
                 blog.tags.add(tag)
                 blog.save()
-            
             for tagName in newTags:
                 tag = Tag(name=tagName)
+                increaseTagValues(tag=tag, posts=1)
                 tag.save()
                 blog.tags.add(tag)
                 blog.save()
+            increaseAuthorValues(posts=1)
+            increaseWebValues(posts=1)
+            setRatings()
 
             for i in range(len(files)):
                 destination_name = 'blog/static/blog/upload/' + str(blog.id) + '_' + str(i) + '_' + files[i].name
@@ -159,3 +262,5 @@ def blog_input_view(request):
         return render(request, 'blog/write_blog.html', context)
     else:
         return HttpResponseRedirect(reverse('login'))
+
+    

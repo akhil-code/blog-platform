@@ -2,16 +2,28 @@
     Welcome {{ user.author }}<br>
     <a href=" {% url 'logout' %}"> logout </a><br>
     <a href=" {% url 'blog_input' %}"> add blog </a><br>
+    <a href=" {% url 'manage' %}">manage</a><br>
 {% else %}
     <a href=" {% url 'login' %}"> login </a><br>
     <a href=" {% url 'signup' %}"> Sign up </a><br>
 {% endif %}
-
 <a href="{% url 'index' %}">Go to home page</a>
 
+
 {% if blog %}
+    {% comment %} title {% endcomment %}
     <h2> {{ blog.title }} </h2>
+    {% comment %} author {% endcomment %}
     <h4> by <a href="{% url 'author_posts' blog.author.id %}"> {{ blog.author }} </a> on {{ blog.date_posted }} </h4>
+    {% comment %} tags {% endcomment %}
+    {% if blog.tags.all %}
+        <ul>
+            {% for tag in blog.tags.all %}
+                <li> {{ tag }} </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% comment %} body {% endcomment %}
     <p>
         {{ blog.body }}
     </p>
