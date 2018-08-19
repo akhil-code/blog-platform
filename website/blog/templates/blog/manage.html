@@ -15,12 +15,14 @@
 {% endif %}
 
 {% if blogs %}
+    {% load static %}
+    <script src="{% static 'blog/js/manage.js' %}"></script>
     {% for blog in blogs %}
         <li>
             <a href="{% url 'blog_view' blog.id %}">
                 {{ blog.title }} ({{ blog.date_posted }})
             </a>
-            <button type="button" data-id="{{ blog.id }}">delete</button>
+            <button class="deleteButton" type="button" data-id="{{ blog.id }}">delete</button>
         </li>
     {% endfor %}
 {% else %}

@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from blog.models import Blog, Author, Comment, Tag, Website
+from django.views.decorators.csrf import csrf_exempt
 import json
 
 def setRatings():
@@ -272,4 +273,13 @@ def blog_input_view(request):
     else:
         return HttpResponseRedirect(reverse('login'))
 
-    
+# delete blog through ajax reqeuest
+@csrf_exempt
+def delete_blog(request):
+    if request.method == 'POST':
+        blog_id = request.POST.get("id")
+        Blog.objects.get(pk=blog_id).delete()
+        print(blog_id)
+        return HttpResponse('success')
+    else:
+        return HttpResponse('unsuccessfull')
