@@ -1,1 +1,0 @@
-manage blogs by user (delete, edit)
