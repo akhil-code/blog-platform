@@ -54,3 +54,9 @@ class Website(models.Model):
 
     def __str__(self):
         return f"website stats(Don't touch)"
+    
+    def save(self, *args, **kwargs):
+        # asserting for no existing objects
+        if Website.objects.exists() and not self.pk:
+            raise AssertionError("Duplicate of Website object shouldn't be created")
+        super(Website, self).save(*args, **kwargs)
