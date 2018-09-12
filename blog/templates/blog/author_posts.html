@@ -25,13 +25,3 @@
     {% endfor %}
 {% endif %}
 
-
-{% if tags %}
-    <br>
-    <strong>Popular Tags</strong>
-    <ul>
-        {% for tag in tags %}
-            <li>{{ tag }} {{ tag.rating }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}

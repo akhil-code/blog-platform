@@ -22,7 +22,7 @@
 
         <!-- body start -->
         <h2>Write Blog</h2>
-        <form id="myform" method="post" action="{% url 'blog_input' %}" enctype="multipart/form-data">
+        <form id="myform" method="post" action="{% url 'blog_input_request' %}" enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- title section -->

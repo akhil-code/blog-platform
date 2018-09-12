@@ -16,7 +16,6 @@ def index(request):
     }
     return render(request, 'blog/index.html', context)
 
-
 # authors posts page
 def author_posts_view(request, author_id):
     author = Author.objects.get(pk=author_id)
@@ -25,7 +24,6 @@ def author_posts_view(request, author_id):
     context = {
         'blogs' : Blog.objects.filter(author=author),
         'user' : request.user if request.user.is_authenticated else None,
-        'tags' : Tag.objects.all(),
     }
     return render(request, 'blog/author_posts.html', context)
 
@@ -36,7 +34,6 @@ def manage_posts_view(request):
         context = {
             'blogs' : Blog.objects.filter(author=author),
             'user' : request.user if request.user.is_authenticated else None,
-            'tags' : Tag.objects.all(),
         }
         return render(request, 'blog/manage.html', context)
     else:
@@ -46,12 +43,15 @@ def manage_posts_view(request):
 def blog_view(request, blog_id):
     blog = Blog.objects.get(pk=blog_id)
     tags = blog.tags.all()
-    
+    body_text_list = json.loads(blog.body)
+
     # rendering page
     context = {
         'blog' : blog,
         'user' : request.user if request.user.is_authenticated else None,
         'tags' : Tag.objects.all(),
+        'body_text_list' : body_text_list,
+        'i' : 0,
     }
     return render(request, 'blog/blog.html', context)
 
@@ -60,16 +60,14 @@ def signup_view(request):
     if request.method == 'POST':
         try:
             # reading inputs
-            fullname = request.POST["fullname"]
+            first_name = request.POST["fullname"]
             username = request.POST["username"]
             email = request.POST["email"]
             password = request.POST["password"]
             # checking for empty fields
-            assert fullname != ''
-            assert username != ''
-            assert email != ''
-            assert password != ''
-            user = User.objects.create_user(username=username, email=email, password=password, first_name=fullname)
+            assert first_name != '' and username != '' and email != '' and password != ''
+            # creating new user object
+            user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name)
             user.save()
             Author(user=user).save()
             return HttpResponseRedirect(reverse('index'))
@@ -87,8 +85,7 @@ def login_view(request):
             username = request.POST['username']
             password = request.POST['password']
             # checking for non empty fields
-            assert username != ''
-            assert password != ''
+            assert username != '' and password != ''
             # authenticating
             user = authenticate(username=username, password=password)
             if user is None:
@@ -112,12 +109,10 @@ def add_comment(request, blog_id):
     if request.method == 'POST':
         try:
             author_id = request.POST["author_id"]
-            assert author_id != None
             author = Author.objects.get(pk=author_id)
             message = request.POST["comment"]
-            assert message != ''
             blog = Blog.objects.get(pk=blog_id)
-            assert blog != None
+            assert author_id != None and message != '' and blog != None
             comment = Comment(author=author, comment=message, blog=blog)
             comment.save()
 
@@ -126,9 +121,19 @@ def add_comment(request, blog_id):
         except AssertionError:
             return HttpResponseRedirect(reverse('blog_view', kwargs={'blog_id':blog_id,}))
 
-# new blog page and processes it's submission
 def blog_input_view(request):
-    # submitting the post
+    if request.user.is_authenticated:
+        context = {
+            'user' : request.user if request.user.is_authenticated else None,
+            'tags' : Tag.objects.all(),
+        }
+        return render(request, 'blog/write_blog.html', context)
+    else:
+        return HttpResponseRedirect(reverse('login'))
+
+# new blog page and processes it's submission
+def blog_input_request(request):
+    # form submit
     if request.method == 'POST' and request.user.is_authenticated:
         try:
             # title
@@ -139,14 +144,19 @@ def blog_input_view(request):
             # author
             author = request.user.author
 
-            assert contentOrder != None #blog shouldn't be empty
-            assert contentOrder != ""
-            assert author != None
+            assert contentOrder != None and contentOrder != ""  # blog shouldn't be empty
+            assert author != None                               # valid user must exist
 
             # saving images
             files = request.FILES.getlist("myfile[]")
             
-            blog = Blog(title=title, body=contentItems, contentOrder=contentOrder, author=author, no_of_images=len(files))
+            blog = Blog(
+                title=title, 
+                body=contentItems, 
+                contentOrder=contentOrder, 
+                author=author, 
+                no_of_images=len(files)
+            )
             blog.save()
 
             #tags
@@ -174,22 +184,26 @@ def blog_input_view(request):
             print(f"Error adding new blog")
             return HttpResponseRedirect(reverse("index"))
 
-    elif request.user.is_authenticated:
-        context = {
-            'user' : request.user if request.user.is_authenticated else None,
-            'tags' : Tag.objects.all(),
-        }
-        return render(request, 'blog/write_blog.html', context)
     else:
-        return HttpResponseRedirect(reverse('login'))
+        return HttpResponse('Access Denied')
 
 # delete blog through ajax reqeuest
 @csrf_exempt
 def delete_blog(request):
     if request.method == 'POST':
         blog_id = request.POST.get("id")
-        Blog.objects.get(pk=blog_id).delete()
-        print(blog_id)
+        blog = Blog.objects.get(pk=blog_id)
+        
+        # remove tags with 0 blogs assosciated with it
+        tags = blog.tags.all()                 
+        for tag in tags:
+            print(f"{tag} : {len(tag.blogs.all())}")
+            if len(tag.blogs.all()) == 1:
+                print(f"deleting {tag}")
+                tag.delete()
+        
+        blog.delete()
+        
         return HttpResponse('success')
     else:
         return HttpResponse('unsuccessful')

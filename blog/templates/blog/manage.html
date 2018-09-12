@@ -17,6 +17,7 @@
 {% if blogs %}
     {% load static %}
     <script src="{% static 'blog/js/manage.js' %}"></script>
+    <h3>My blogs</h3>
     {% for blog in blogs %}
         <li>
             <a href="{% url 'blog_view' blog.id %}">
@@ -26,6 +27,7 @@
         </li>
     {% endfor %}
 {% else %}
-        <i>No blogs to manage</i>
+    <h3>Blog Management Panel</h3>
+    <i>No blogs to manage</i>
 {% endif %}
 
