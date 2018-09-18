@@ -207,3 +207,6 @@ def delete_blog(request):
         return HttpResponse('success')
     else:
         return HttpResponse('unsuccessful')
+
+def test_view(request):
+    return render(request, 'blog/blog_template.html')
