@@ -14,24 +14,30 @@
     {% comment %} title {% endcomment %}
     <h2> {{ blog.title }} </h2>
     {% comment %} author {% endcomment %}
-    <h4> by <a href="{% url 'author_posts' blog.author.id %}"> {{ blog.author }} </a> on {{ blog.date_posted }} </h4>
+    <p> by <a href="{% url 'author_posts' blog.author.id %}"> {{ blog.author }} </a> on {{ blog.date_posted }} </p>
+    
     {% comment %} tags {% endcomment %}
     {% if blog.tags.all %}
-        <ul>
-            {% for tag in blog.tags.all %}
-                <li> {{ tag }} </li>
-            {% endfor %}
-        </ul>
+        <strong>Tags:</strong>
+        {% for tag in blog.tags.all %}
+            <small>{{ tag }},</small>
+        {% endfor %}
     {% endif %}
-    {% comment %} body {% endcomment %}
-    <p>
-        {{ blog.body }}
-    </p>
+    <br><br>
 
+    {% comment %} body {% endcomment %}
+    <ul style="white-space:pre-line; list-style-type: none">
+        {% for content in body_text_list %}
+            <li> {{ content }} </li>
+        {% endfor %}
+    </ul>
+
+
+    {% comment %} add comments section {% endcomment %}
     {% if blog.comments.all %}
         <h4>Comments</h4>
         {% for comment in blog.comments.all %}
-            <li>{{ comment.comment }}</li>
+            <li>{{ comment.comment }} (by {{ comment.author }})</li>
         {% endfor %}
     {% endif %}
     <br>

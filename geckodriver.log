@@ -1,0 +1,267 @@
+1536716155770	geckodriver	INFO	geckodriver 0.21.0
+1536716155779	geckodriver	INFO	Listening on 127.0.0.1:47671
+1536716156797	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.mXoQwznmc0r0"
+1536716159716	Marionette	INFO	Listening on port 38754
+1536716159811	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536716159872	Marionette	DEBUG	[2147483649] Frame script loaded
+1536716159878	Marionette	DEBUG	[2147483649] Frame script registered
+1536716168169	Marionette	INFO	Stopped listening on port 38754
+1536716454297	geckodriver	INFO	geckodriver 0.21.0
+1536716454304	geckodriver	INFO	Listening on 127.0.0.1:55774
+1536716455307	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.dpgeuKp9Pjjx"
+1536716457110	Marionette	INFO	Listening on port 40410
+1536716457153	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536716457250	Marionette	DEBUG	[2147483649] Frame script loaded
+1536716457255	Marionette	DEBUG	[2147483649] Frame script registered
+1536716457501	geckodriver	INFO	geckodriver 0.21.0
+1536716457511	geckodriver	INFO	Listening on 127.0.0.1:51446
+1536716458513	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.ECwx0oVa9gYn"
+1536716460302	Marionette	INFO	Listening on port 46857
+1536716460348	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536716460405	Marionette	DEBUG	[2147483649] Frame script loaded
+1536716460411	Marionette	DEBUG	[2147483649] Frame script registered
+1536716511556	Marionette	DEBUG	[4294967297] Frame script loaded
+1536716511557	Marionette	DEBUG	[4294967297] Frame script registered
+1536716511589	Marionette	DEBUG	[4294967299] Frame script loaded
+1536716511590	Marionette	DEBUG	[4294967299] Frame script registered
+[Parent 15589, Gecko_IOThread] WARNING: pipe error (71): Connection reset by peer: file /build/firefox-2GyqsY/firefox-62.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1536716514350	Marionette	INFO	Stopped listening on port 40410
+1536716517728	Marionette	INFO	Stopped listening on port 46857
+1536717290845	geckodriver	INFO	geckodriver 0.21.0
+1536717290852	geckodriver	INFO	Listening on 127.0.0.1:60409
+1536717291861	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.p7WKnFc5PYgU"
+1536717293585	Marionette	INFO	Listening on port 43692
+1536717293673	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717293751	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717293753	Marionette	DEBUG	[2147483649] Frame script registered
+1536717293923	geckodriver	INFO	geckodriver 0.21.0
+1536717293929	geckodriver	INFO	Listening on 127.0.0.1:53126
+1536717294929	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.ZeRiQ13tBw4W"
+1536717296733	Marionette	INFO	Listening on port 45634
+1536717296761	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717296826	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717296828	Marionette	DEBUG	[2147483649] Frame script registered
+1536717335666	geckodriver	INFO	geckodriver 0.21.0
+1536717335672	geckodriver	INFO	Listening on 127.0.0.1:53146
+1536717336674	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.9jsHvnpIxopW"
+1536717338359	Marionette	INFO	Listening on port 37670
+1536717338402	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717338463	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717338474	Marionette	DEBUG	[2147483649] Frame script registered
+1536717338667	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536717338677	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536717338679	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536717338723	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for about:neterror?e=connectionFailure&u=http%3A//127.0.0.1%3A8000/&c=UTF-8&f=regular&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20127.0.0.1%3A8000.
+1536717338745	geckodriver	INFO	geckodriver 0.21.0
+1536717338753	geckodriver	INFO	Listening on 127.0.0.1:42446
+1536717339750	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.u9eIemNzrPPH"
+1536717341515	Marionette	INFO	Listening on port 35026
+1536717341580	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717341646	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717341649	Marionette	DEBUG	[2147483649] Frame script registered
+[Parent 16847, Gecko_IOThread] WARNING: pipe error (43): Connection reset by peer: file /build/firefox-2GyqsY/firefox-62.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1536717355368	Marionette	INFO	Stopped listening on port 35026
+1536717382874	Marionette	DEBUG	[4294967297] Frame script loaded
+1536717382875	Marionette	DEBUG	[4294967297] Frame script registered
+1536717382907	Marionette	DEBUG	[4294967299] Frame script loaded
+1536717382907	Marionette	DEBUG	[4294967299] Frame script registered
+1536717387130	Marionette	INFO	Stopped listening on port 45634
+1536717388066	Marionette	INFO	Stopped listening on port 37670
+1536717393226	Marionette	INFO	Stopped listening on port 43692
+1536717401307	geckodriver	INFO	geckodriver 0.21.0
+1536717401314	geckodriver	INFO	Listening on 127.0.0.1:53392
+1536717402319	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.d5wKyfbJNIz3"
+1536717404046	Marionette	INFO	Listening on port 37831
+1536717404131	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717404197	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717404199	Marionette	DEBUG	[2147483649] Frame script registered
+1536717404401	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536717404473	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536717404497	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for http://127.0.0.1:8000/
+1536717404541	Marionette	DEBUG	[2147483649] Received DOM event pageshow for http://127.0.0.1:8000/
+1536717404575	Marionette	INFO	Stopped listening on port 37831
+1536717404622	addons.xpi	WARN	Exception running bootstrap method shutdown on activity-stream@mozilla.org: TypeError: setting getter-only property "_currentSearchHostname" (resource://activity-stream/lib/TopSitesFeed.jsm:86:5) JS Stack trace: uninit@TopSitesFeed.jsm:86:5
+onAction@TopSitesFeed.jsm:707:9
+_middleware/</<@Store.jsm:51:11
+Store/this[method]@Store.jsm:29:55
+uninit@Store.jsm:170:7
+uninit@ActivityStream.jsm:363:5
+uninit@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///usr/lib/firefox/browser/features/activity-stream@bootstrap.js:86:5
+shutdown@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///usr/lib/firefox/browser/features/activity-stream@bootstrap.js:194:3
+callBootstrapMethod@XPIProvider.jsm:1588:20
+_shutdown@XPIProvider.jsm:1724:12
+observe@AsyncShutdown.jsm:541:9
+GeckoDriver.prototype.quit@driver.js:3319:3
+despatch@server.js:297:20
+execute@server.js:271:11
+onPacket/<@server.js:246:15
+onPacket@server.js:245:8
+_onJSONObjectReady/<@transport.js:500:9
+[Parent 17518, Gecko_IOThread] WARNING: pipe error (74): Connection reset by peer: file /build/firefox-2GyqsY/firefox-62.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 841: Error: Connection is not open.
+1536717405203	geckodriver	INFO	geckodriver 0.21.0
+1536717405209	geckodriver	INFO	Listening on 127.0.0.1:43626
+1536717406213	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.iZ943nHRpRpD"
+1536717408013	Marionette	INFO	Listening on port 41364
+1536717408061	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717408126	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717408130	Marionette	DEBUG	[2147483649] Frame script registered
+[Parent 17729, Gecko_IOThread] WARNING: pipe error (43): Connection reset by peer: file /build/firefox-2GyqsY/firefox-62.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1536717423062	Marionette	INFO	Stopped listening on port 41364
+1536717472176	geckodriver	INFO	geckodriver 0.21.0
+1536717472187	geckodriver	INFO	Listening on 127.0.0.1:38746
+1536717473193	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.tZiIcp40fz6N"
+1536717474916	Marionette	INFO	Listening on port 34686
+1536717475008	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717475072	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717475075	Marionette	DEBUG	[2147483649] Frame script registered
+1536717495822	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536717495852	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536717495858	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for http://localhost/
+1536717495901	Marionette	DEBUG	[2147483649] Received DOM event pageshow for http://localhost/
+1536717505033	Marionette	INFO	Stopped listening on port 34686
+1536717872223	geckodriver	INFO	geckodriver 0.21.0
+1536717872230	geckodriver	INFO	Listening on 127.0.0.1:56428
+1536717873232	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.HgqpJ537bW0o"
+1536717875243	Marionette	INFO	Listening on port 38937
+1536717875344	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717875417	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717875424	Marionette	DEBUG	[2147483649] Frame script registered
+1536717875666	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536717875698	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536717875730	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for http://127.0.0.1:8000/signup
+1536717875771	Marionette	DEBUG	[2147483649] Received DOM event pageshow for http://127.0.0.1:8000/signup
+1536717875841	Marionette	INFO	Stopped listening on port 38937
+1536717875883	addons.xpi	WARN	Exception running bootstrap method shutdown on activity-stream@mozilla.org: TypeError: setting getter-only property "_currentSearchHostname" (resource://activity-stream/lib/TopSitesFeed.jsm:86:5) JS Stack trace: uninit@TopSitesFeed.jsm:86:5
+onAction@TopSitesFeed.jsm:707:9
+_middleware/</<@Store.jsm:51:11
+Store/this[method]@Store.jsm:29:55
+uninit@Store.jsm:170:7
+uninit@ActivityStream.jsm:363:5
+uninit@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///usr/lib/firefox/browser/features/activity-stream@bootstrap.js:86:5
+shutdown@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///usr/lib/firefox/browser/features/activity-stream@bootstrap.js:194:3
+callBootstrapMethod@XPIProvider.jsm:1588:20
+_shutdown@XPIProvider.jsm:1724:12
+observe@AsyncShutdown.jsm:541:9
+GeckoDriver.prototype.quit@driver.js:3319:3
+despatch@server.js:297:20
+execute@server.js:271:11
+onPacket/<@server.js:246:15
+onPacket@server.js:245:8
+_onJSONObjectReady/<@transport.js:500:9
+[Parent 18940, Gecko_IOThread] WARNING: pipe error (73): Connection reset by peer: file /build/firefox-2GyqsY/firefox-62.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 841: Error: Connection is not open.
+1536717880146	geckodriver	INFO	geckodriver 0.21.0
+1536717880152	geckodriver	INFO	Listening on 127.0.0.1:33240
+1536717881152	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.bC4gpjXIDFw3"
+1536717883087	Marionette	INFO	Listening on port 41885
+1536717883170	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536717883257	Marionette	DEBUG	[2147483649] Frame script loaded
+1536717883259	Marionette	DEBUG	[2147483649] Frame script registered
+1536717895029	Marionette	INFO	Stopped listening on port 41885
+1536718343262	geckodriver	INFO	geckodriver 0.21.0
+1536718343268	geckodriver	INFO	Listening on 127.0.0.1:33907
+1536718344267	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.lr9iBu2ZmXGa"
+1536718346115	Marionette	INFO	Listening on port 38347
+1536718346203	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536718346277	Marionette	DEBUG	[2147483649] Frame script loaded
+1536718346284	Marionette	DEBUG	[2147483649] Frame script registered
+1536718346535	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536718346554	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536718346587	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for http://127.0.0.1:8000/signup
+1536718346616	Marionette	DEBUG	[2147483649] Received DOM event pageshow for http://127.0.0.1:8000/signup
+1536718346710	Marionette	INFO	Stopped listening on port 38347
+1536718346759	addons.xpi	WARN	Exception running bootstrap method shutdown on activity-stream@mozilla.org: TypeError: setting getter-only property "_currentSearchHostname" (resource://activity-stream/lib/TopSitesFeed.jsm:86:5) JS Stack trace: uninit@TopSitesFeed.jsm:86:5
+onAction@TopSitesFeed.jsm:707:9
+_middleware/</<@Store.jsm:51:11
+Store/this[method]@Store.jsm:29:55
+uninit@Store.jsm:170:7
+uninit@ActivityStream.jsm:363:5
+uninit@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///usr/lib/firefox/browser/features/activity-stream@bootstrap.js:86:5
+shutdown@resource://gre/modules/addons/XPIProvider.jsm -> jar:file:///usr/lib/firefox/browser/features/activity-stream@bootstrap.js:194:3
+callBootstrapMethod@XPIProvider.jsm:1588:20
+_shutdown@XPIProvider.jsm:1724:12
+observe@AsyncShutdown.jsm:541:9
+GeckoDriver.prototype.quit@driver.js:3319:3
+despatch@server.js:297:20
+execute@server.js:271:11
+onPacket/<@server.js:246:15
+onPacket@server.js:245:8
+_onJSONObjectReady/<@transport.js:500:9
+[Parent 19787, Gecko_IOThread] WARNING: pipe error (72): Connection reset by peer: file /build/firefox-2GyqsY/firefox-62.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+JavaScript error: resource://gre/modules/Sqlite.jsm, line 841: Error: Connection is not open.
+1536718350957	geckodriver	INFO	geckodriver 0.21.0
+1536718350962	geckodriver	INFO	Listening on 127.0.0.1:33493
+1536718351969	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.lDf0ZGZn3uF8"
+1536718353767	Marionette	INFO	Listening on port 41382
+1536718353803	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536718353882	Marionette	DEBUG	[2147483649] Frame script loaded
+1536718353886	Marionette	DEBUG	[2147483649] Frame script registered
+1536718363219	Marionette	INFO	Stopped listening on port 41382
+1536772333504	geckodriver	INFO	geckodriver 0.21.0
+1536772333516	geckodriver	INFO	Listening on 127.0.0.1:39043
+1536772334511	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.Rl5QRh4Q9iJp"
+1536772336613	Marionette	INFO	Listening on port 42187
+1536772336627	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536772336707	Marionette	DEBUG	[2147483649] Frame script loaded
+1536772336715	Marionette	DEBUG	[2147483649] Frame script registered
+1536772604321	geckodriver	INFO	geckodriver 0.21.0
+1536772604330	geckodriver	INFO	Listening on 127.0.0.1:47470
+1536772605326	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.2AUoaeCbi035"
+1536772608360	Marionette	INFO	Listening on port 42250
+1536772608445	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536772608511	Marionette	DEBUG	[2147483649] Frame script loaded
+1536772608513	Marionette	DEBUG	[2147483649] Frame script registered
+1536772608675	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536772608692	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536772608699	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536772608737	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for about:neterror?e=connectionFailure&u=http%3A//127.0.0.1%3A8000/signup&c=UTF-8&f=regular&d=Firefox%20can%E2%80%99t%20establish%20a%20connection%20to%20the%20server%20at%20127.0.0.1%3A8000.
+1536772610729	Marionette	DEBUG	[4294967297] Frame script loaded
+1536772610730	Marionette	DEBUG	[4294967297] Frame script registered
+1536772610762	Marionette	DEBUG	[4294967299] Frame script loaded
+1536772610763	Marionette	DEBUG	[4294967299] Frame script registered
+1536772611488	Marionette	DEBUG	[4294967303] Frame script loaded
+1536772611489	Marionette	DEBUG	[4294967303] Frame script registered
+1536772612084	Marionette	DEBUG	[4294967306] Frame script loaded
+1536772612086	Marionette	DEBUG	[4294967306] Frame script registered
+1536772612735	Marionette	DEBUG	[4294967309] Frame script loaded
+1536772612737	Marionette	DEBUG	[4294967309] Frame script registered
+1536772616414	Marionette	INFO	Stopped listening on port 42250
+1536772621191	Marionette	INFO	Stopped listening on port 42187
+1536772641019	geckodriver	INFO	geckodriver 0.21.0
+1536772641026	geckodriver	INFO	Listening on 127.0.0.1:35769
+1536772642035	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.ICsxsmGVSNIM"
+1536772644149	Marionette	INFO	Listening on port 39595
+1536772644290	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536772644380	Marionette	DEBUG	[2147483649] Frame script loaded
+1536772644382	Marionette	DEBUG	[2147483649] Frame script registered
+1536772644584	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536772644624	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536772644642	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for http://127.0.0.1:8000/signup
+1536772644685	Marionette	DEBUG	[2147483649] Received DOM event pageshow for http://127.0.0.1:8000/signup
+1536772690223	geckodriver	INFO	geckodriver 0.21.0
+1536772690229	geckodriver	INFO	Listening on 127.0.0.1:36707
+1536772691236	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.CEQvNZwWoGGJ"
+1536772693138	Marionette	INFO	Listening on port 34911
+1536772693183	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536772693280	Marionette	DEBUG	[2147483649] Frame script loaded
+1536772693284	Marionette	DEBUG	[2147483649] Frame script registered
+1536772693489	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536772693522	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536772693543	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for http://127.0.0.1:8000/signup
+1536772693606	Marionette	DEBUG	[2147483649] Received DOM event pageshow for http://127.0.0.1:8000/signup
+[Parent 8084, Gecko_IOThread] WARNING: pipe error (97): Connection reset by peer: file /build/firefox-2GyqsY/firefox-62.0+build2/ipc/chromium/src/chrome/common/ipc_channel_posix.cc, line 353
+1536772718911	Marionette	INFO	Stopped listening on port 34911
+1536772722284	Marionette	INFO	Stopped listening on port 39595
+1536777393150	geckodriver	INFO	geckodriver 0.21.0
+1536777393157	geckodriver	INFO	Listening on 127.0.0.1:45748
+1536777394159	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.5Ud5gFX7yNW8"
+1536777397296	Marionette	INFO	Listening on port 41162
+1536777397381	Marionette	WARN	TLS certificate errors will be ignored for this session
+1536777397466	Marionette	DEBUG	[2147483649] Frame script loaded
+1536777397477	Marionette	DEBUG	[2147483649] Frame script registered
+1536777397688	Marionette	DEBUG	[2147483649] Received DOM event beforeunload for about:blank
+1536777397715	Marionette	DEBUG	[2147483649] Received DOM event pagehide for about:blank
+1536777397762	Marionette	DEBUG	[2147483649] Received DOM event DOMContentLoaded for http://127.0.0.1:8000/signup
+1536777397786	Marionette	DEBUG	[2147483649] Received DOM event pageshow for http://127.0.0.1:8000/signup
+1536777408779	Marionette	INFO	Stopped listening on port 41162

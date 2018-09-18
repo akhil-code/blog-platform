@@ -7,38 +7,22 @@
     <a href=" {% url 'login' %}"> login </a><br>
     <a href=" {% url 'signup' %}"> Sign up </a><br>
 {% endif %}
+<br>
 
 {% if message %}
     {{ message }}
 {% endif %}
 
+<h2>Blogs: </h2>
 {% if blogs %}
     {% for blog in blogs %}
         <li>
             <a href="{% url 'blog_view' blog.id %}">
-                {{ blog.title }} by {{ blog.author}} posted on {{ blog.date_posted }} {{ blog.rating }}
+                {{ blog.title }} by {{ blog.author}}
             </a>
         </li>
     {% endfor %}
-{% endif %}
-
-
-{% if tags %}
-    <br>
-    <strong>Popular Tags</strong>
-    <ul>
-        {% for tag in tags %}
-            <li>{{ tag }} {{ tag.rating }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-{% if authors %}
-    <br>
-    <strong>Popular Authors</strong>
-    <ul>
-        {% for author in authors %}
-            <li>{{ author }} {{ author.rating }}</li>
-        {% endfor %}
-    </ul>
+{% else %}
+        No blogs found! <br>
+        Start writing one <a href=" {% url 'blog_input' %}"> here </a><br>
 {% endif %}
