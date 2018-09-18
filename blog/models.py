@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import datetime
+from django.utils import timezone
 
 # Create your models here.
 class Author(models.Model):
@@ -37,3 +37,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"Comment by {self.author} on {self.blog}"
+
+class Improvement(models.Model):
+    body = models.CharField(max_length=255, blank=False)
