@@ -24,18 +24,29 @@
                                 <div class="panel-body">
                                     <h4> {{ blog.title }} </h4>
                                     {% if blog.overview %}
-                                        <p style="white-space:pre-line;"> {{ blog.overview }} ......</p>
+                                        <div class="text-muted">
+                                            {{ blog.overview }} ......
+                                        </div>
+                                        <br>
                                     {% endif %}
-                                    <a href="{% url 'blog_view' blog.id %}">
-                                        <button type="button" class="btn btn-primary btn-sm">Read More</button>
-                                    </a>
                                 </div>
                                 <div class="panel-footer">
-                                    <div class="text-muted">
-                                        Posted on {{ blog.date_posted }} by
-                                        <a href="{% url 'author_posts' blog.author.id %}"> 
-                                            <mark> {{ blog.author }} </mark> 
-                                        </a>
+                                    <div class="row">
+                                        <div class="col-lg-8 col-xs-8">
+                                            <div class="text-muted">
+                                                Posted on {{ blog.date_posted }} by
+                                                <a href="{% url 'author_posts' blog.author.id %}"> 
+                                                    <mark> {{ blog.author }} </mark> 
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-xs-4">
+                                            <a href="{% url 'blog_view' blog.id %}" class="pull-right">
+                                                <button type="button" class="btn btn-primary btn-sm">
+                                                    Read More <span class="glyphicon glyphicon-chevron-right"></span>
+                                                </button>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

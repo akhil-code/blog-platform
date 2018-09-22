@@ -48,3 +48,5 @@ class Comment(models.Model):
     def __str__(self):
         return f"Comment by {self.author} on {self.blog}"
 
+class Improvement(models.Model):
+    content = models.CharField(max_length=255, blank=False)
