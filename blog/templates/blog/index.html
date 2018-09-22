@@ -23,6 +23,9 @@
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <h4> {{ blog.title }} </h4>
+                                    {% if blog.overview %}
+                                        <p style="white-space:pre-line;"> {{ blog.overview }} ......</p>
+                                    {% endif %}
                                     <a href="{% url 'blog_view' blog.id %}">
                                         <button type="button" class="btn btn-primary btn-sm">Read More</button>
                                     </a>

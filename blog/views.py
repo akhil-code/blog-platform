@@ -10,8 +10,9 @@ import json
 
 # home page
 def index(request):
+    blogs = Blog.objects.all()
     context = {
-        'blogs' : Blog.objects.all(),
+        'blogs' : blogs,
         'user' : request.user if request.user.is_authenticated else None,
     }
     return render(request, 'blog/index.html', context)
