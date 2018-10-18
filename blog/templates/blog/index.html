@@ -4,6 +4,12 @@
     Home | Blog
 {% endblock%}
 
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
+    <script src="{% static 'blog/js/index.js' %}"></script>
+{% endblock %}
+
 {% block body %}
     <div class="row">
         <div class="col-lg-12">
@@ -20,7 +26,7 @@
                 <div class="col-lg-12">
                     {% if blogs %}
                         {% for blog in blogs %}
-                            <div class="panel panel-default">
+                            <div class="panel panel-default list-item">
                                 <div class="panel-body">
                                     <h4> {{ blog.title }} </h4>
                                     {% if blog.overview %}

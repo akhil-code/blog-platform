@@ -1,0 +1,10 @@
+.fade-in{
+    transition: all 0.5s ease-out;
+    transform: rotateX(-45deg);
+    opacity: 0;
+}
+
+.fade-in-show{
+    transform: none;
+    opacity: 1;
+}
