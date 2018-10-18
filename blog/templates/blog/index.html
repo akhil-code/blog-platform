@@ -1,28 +1,83 @@
-{% if user %}
-    Welcome {{ user.first_name }}<br>
-    <a href=" {% url 'logout' %}"> logout </a><br>
-    <a href=" {% url 'blog_input' %}"> add blog </a><br>
-    <a href=" {% url 'manage' %}">manage</a><br>
-{% else %}
-    <a href=" {% url 'login' %}"> login </a><br>
-    <a href=" {% url 'signup' %}"> Sign up </a><br>
-{% endif %}
-<br>
+{% extends "blog/base.html" %}
 
-{% if message %}
-    {{ message }}
-{% endif %}
+{% block title %}
+    Home | Blog
+{% endblock%}
 
-<h2>Blogs: </h2>
-{% if blogs %}
-    {% for blog in blogs %}
-        <li>
-            <a href="{% url 'blog_view' blog.id %}">
-                {{ blog.title }} by {{ blog.author}}
-            </a>
-        </li>
-    {% endfor %}
-{% else %}
-        No blogs found! <br>
-        Start writing one <a href=" {% url 'blog_input' %}"> here </a><br>
-{% endif %}
+{% block head %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'blog/css/index.css' %}">
+    <script src="{% static 'blog/js/index.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-12">
+            <h2> Blogs </h2>
+            {% if message %}
+                {{ message }}
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if blogs %}
+                        {% for blog in blogs %}
+                            <div class="panel panel-default list-item">
+                                <div class="panel-body">
+                                    <h4> {{ blog.title }} </h4>
+                                    {% if blog.overview %}
+                                        <div class="text-muted">
+                                            {{ blog.overview }} ......
+                                        </div>
+                                        <br>
+                                    {% endif %}
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-xs-8">
+                                            <div class="text-muted">
+                                                Posted on {{ blog.date_posted }} by
+                                                <a href="{% url 'author_posts' blog.author.id %}"> 
+                                                    <mark> {{ blog.author }} </mark> 
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-xs-4">
+                                            <a href="{% url 'blog_view' blog.id %}" class="pull-right">
+                                                <button type="button" class="btn btn-primary btn-sm">
+                                                    Read More <span class="glyphicon glyphicon-chevron-right"></span>
+                                                </button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        {% endfor %}
+                    {% else %}
+                            No blogs found! <br>
+                            Start writing one <a href=" {% url 'blog_input' %}"> here </a><br>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+            <div class="well">
+                <h4>Upcoming Changes</h4>
+                <ul>
+                    <li>UI changes on home page</li>
+                    <li>Pagination inclusion on home page</li>
+                    <li>Add css for login and signup page</li>
+                    <li>Add css for write blog page</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock%}

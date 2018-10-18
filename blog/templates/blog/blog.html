@@ -1,60 +1,113 @@
-{% if user %}
-    Welcome {{ user.author }}<br>
-    <a href=" {% url 'logout' %}"> logout </a><br>
-    <a href=" {% url 'blog_input' %}"> add blog </a><br>
-    <a href=" {% url 'manage' %}">manage</a><br>
-{% else %}
-    <a href=" {% url 'login' %}"> login </a><br>
-    <a href=" {% url 'signup' %}"> Sign up </a><br>
-{% endif %}
-<a href="{% url 'index' %}">Go to home page</a>
+{% extends "blog/base.html" %}
+
+{% block title %}
+    {{ blog.title }} | Blog
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+
+            {% comment %} title section {% endcomment %}
+            <div class="row">
+                <div class="col-lg-12">
+                    {% if blog %}
+                        {% comment %} title {% endcomment %}
+                        <h2> 
+                            {{ blog.title }}
+                        </h2>
+                        {% comment %} author {% endcomment %}
+                        
+                        <p> by 
+                            <a href="{% url 'author_posts' blog.author.id %}"> 
+                            <mark> {{ blog.author }} </mark> 
+                            </a> 
+                            on {{ blog.date_posted }} 
+                        </p>
+
+                        {% comment %} tags {% endcomment %}
+                        {% if blog.tags.all %}
+                            <div class="btn-group">
+                                {% for tag in blog.tags.all %}
+                                    <button type="button" class="btn btn-default btn-xs">
+                                        {{ tag }}
+                                    </button>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+
+                        <hr>
+                        
+                    {% endif %}
+                </div>
+            </div>
 
 
-{% if blog %}
-    {% comment %} title {% endcomment %}
-    <h2> {{ blog.title }} </h2>
-    {% comment %} author {% endcomment %}
-    <p> by <a href="{% url 'author_posts' blog.author.id %}"> {{ blog.author }} </a> on {{ blog.date_posted }} </p>
-    
-    {% comment %} tags {% endcomment %}
-    {% if blog.tags.all %}
-        <strong>Tags:</strong>
-        {% for tag in blog.tags.all %}
-            <small>{{ tag }},</small>
-        {% endfor %}
-    {% endif %}
-    <br><br>
+            {% comment %} body / content section {% endcomment %}
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for content in body_text_list %}
+                        <div class="well" style="white-space:pre-line">
+                            {{ content }}
+                        </div>
+                    {% endfor %}
+                    <hr>
+                </div>
+            </div>
 
-    {% comment %} body {% endcomment %}
-    <ul style="white-space:pre-line; list-style-type: none">
-        {% for content in body_text_list %}
-            <li> {{ content }} </li>
-        {% endfor %}
-    </ul>
+            {% comment %}comments section {% endcomment %}
+            <div class="row">
+                {% if blog.comments.all %}
+                    <div class="col-lg-6">
+                        <h4>Comments</h4>
+                        
+                        {% for comment in blog.comments.all %}
+                            <div class="row">
+                                <div class="col-xs-2">
+                                    {% load static %}
+                                    <img src="{% static 'blog/img/user.png' %}" 
+                                    style="width:70%;height:70%;vertical-align:middle;display:block;margin-left:auto;margin-right:auto" 
+                                    alt="user icon"> 
+                                </div>
+                                <div class="col-xs-10">
+                                    <strong>{{ comment.author }}</strong>
+                                    <p>{{ comment.comment }}</p>
+                                </div>
+                            </div>
+                        
+                        {% endfor %}
+
+                        
+                    </div>
+                {% endif %}
+
+                <div class="col-lg-6">
+                    {% if user %}
+                        {% load static %}
+                        <script src="{% static 'blog/js/blog.js' %}"></script>
+                        <h4>Leave a comment</h4>
+                        <form method="post" id="commentForm" action="{% url 'add_comment' blog.id %}">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" name="comment" placeholder="write your comment here"></textarea>
+                            </div> 
+                            <input type="hidden" name="author_id" value="{{ user.author.id }}">
+                            <button type="submit" class="btn btn-primary btn-sm"> Add comment </button>
+                        </form>
+                        <hr>
+                    {% else %}
+                        <mark>
+                            <a href=" {% url 'login' %}"> login </a> or
+                            <a href=" {% url 'signup' %}"> Sign up </a> to add comments
+                        </mark>
+                    {% endif %}
+                </div>
+            </div>
+                
+            
+        </div>
+    </div>
 
 
-    {% comment %} add comments section {% endcomment %}
-    {% if blog.comments.all %}
-        <h4>Comments</h4>
-        {% for comment in blog.comments.all %}
-            <li>{{ comment.comment }} (by {{ comment.author }})</li>
-        {% endfor %}
-    {% endif %}
-    <br>
-
-    {% if user %}
-        {% load static %}
-        <script src="{% static 'blog/js/blog.js' %}"></script>
-        <h4>Leave a comment</h4>
-        <form method="post" id="commentForm" action="{% url 'add_comment' blog.id %}">
-            {% csrf_token %}
-            <textarea rows="3" name="comment" placeholder="write your comment here"></textarea><br>
-            <input type="hidden" name="author_id" value="{{ user.author.id }}">
-            <input type="submit" value="add comment">
-        </form>
-    {% else %}
-        <a href=" {% url 'login' %}"> login </a> or
-        <a href=" {% url 'signup' %}"> Sign up </a> to add comments
-    {% endif %}
-
-{% endif %}
+ 
+{% endblock %}

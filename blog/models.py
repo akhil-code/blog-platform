@@ -1,6 +1,9 @@
-from django.db import models
+import json
+
 from django.contrib.auth.models import User
+from django.db import models
 from django.utils import timezone
+
 
 # Create your models here.
 class Author(models.Model):
@@ -19,6 +22,7 @@ class Tag(models.Model):
 class Blog(models.Model):
     title = models.CharField(max_length=255, blank=False)
     body = models.TextField(blank=False)
+    overview = models.CharField(max_length=255, blank=True, default=None)
     contentOrder = models.CharField(max_length=255, blank=True, default=None)
     no_of_images = models.IntegerField(default=0, blank=True)
     author = models.ForeignKey('Author', on_delete=models.CASCADE, blank=False)
@@ -27,6 +31,12 @@ class Blog(models.Model):
 
     def __str__(self):
         return f"{self.title} by {self.author}"
+    
+    def save(self, *args, **kwargs):
+        contentItems = json.loads(self.body)
+        s = contentItems[0]
+        self.overview = s[:100]
+        super(Blog, self).save(*args, **kwargs)
 
 
 class Comment(models.Model):
@@ -39,4 +49,4 @@ class Comment(models.Model):
         return f"Comment by {self.author} on {self.blog}"
 
 class Improvement(models.Model):
-    body = models.CharField(max_length=255, blank=False)
+    content = models.CharField(max_length=255, blank=False)
